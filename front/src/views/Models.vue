@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div v-if='models'>
-            <h1> Models </h1>
-            <div v-for='model in models' :key='model.id'>
-                <router-link v-bind:to="{name: 'Specs', params: {id: model.id}}">
-                    <h3> {{ model.modelName }} </h3>
-                </router-link>
-            </div>
+        <h1> Models </h1>
+        <div v-for='model in models' v-bind:key="model.id">
+            <router-link v-bind:to="{name: 'Specs', params: {id: model.id}}">
+                <h3> {{ model }} </h3>
+            </router-link>
         </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     // props: ['id'],
     data(){
@@ -20,10 +20,8 @@ export default {
         }
     },
     mounted(){
-        fetch('http://localhost:8000/models/')
-        .then(response => response.json())
-        .then(data => this.models = data)
-        .catch(error => console.log(error))
+        axios.get('http://localhost:8000/models/')
+        .then(response => {this.models = response.data})
     }
 }
 </script>

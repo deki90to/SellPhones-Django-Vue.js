@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     path('', views.BrandView),
     path('models/', views.ModelView),
-    path('specs/<pk>/', views.SpecsView)
+    path('specs/<pk>', views.SpecsView)
 ]

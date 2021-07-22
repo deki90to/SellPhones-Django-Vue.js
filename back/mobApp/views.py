@@ -22,3 +22,4 @@ def SpecsView(request, pk):
     specs = Specs.objects.get(pk=pk)
     serializer = SpecsSerializer(specs, many=False)
     return Response(serializer.data)
+

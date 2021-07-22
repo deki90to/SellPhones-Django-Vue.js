@@ -16,16 +16,16 @@ const routes = [
     component: About
   },
   {
-    path: '/models',
+    path: '/models/',
     name: 'Models',
-    component: Models
+    component: Models,
   },
   {
     path: '/specs/:id',
     name: 'Specs',
     component: Specs,
     props: true
-  }
+  },
 ]
 
 const router = createRouter({
