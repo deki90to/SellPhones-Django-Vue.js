@@ -16,12 +16,13 @@ const routes = [
     component: About
   },
   {
-    path: '/models/',
+    path: '/model',
     name: 'Models',
     component: Models,
+    props: true
   },
   {
-    path: '/specs/:id',
+    path: '/model/specs/:id',
     name: 'Specs',
     component: Specs,
     props: true

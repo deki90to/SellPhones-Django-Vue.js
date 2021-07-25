@@ -2,20 +2,30 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 from django.urls import base, reverse
 # from django_resized import ResizedImageField
+from django.utils import timezone
 # Create your models here.
 
+
 class Brand(models.Model):
-    brand = models.CharField(max_length=100)
+    brandName = models.CharField(max_length=100)
 
     def __str__(self):
-        return(f'{self.brand}')
+        return(f'{ self.brandName }')
+
 
 class Model(models.Model):
-    brand = models.ForeignKey('Brand', on_delete=models.CASCADE)
+    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, null=True)
     modelName = models.CharField(max_length=100)
+    createdOn = models.DateField(default=timezone.now)
+    warranty = models.BooleanField()
+    damaged = models.BooleanField()
+    repaired = models.BooleanField()
+    firstOwner = models.BooleanField()
+    price = models.IntegerField()
 
     def __str__(self):
-        return(f'{self.brand} {self.modelName}')
+        return(f'{ self.brand } { self.modelName } / { self.price }e / Created: { self.createdOn } ')
+
 
 class Specs(models.Model):
     model = models.ForeignKey('Model', on_delete=models.CASCADE, null=True)
@@ -31,4 +41,4 @@ class Specs(models.Model):
     fastCharging = models.BooleanField()
 
     def __str__(self):
-        return(f'{self.model}')
+        return(f'{ self.model }')

@@ -2,8 +2,8 @@
     <div>
         <h1> Brands </h1> <hr>
         <div v-for="brand in brands" v-bind:key="brand.id">
-            <router-link v-bind:to="{name: 'Models'}">
-                <h3> {{ brand }} </h3>
+            <router-link v-bind:to="{name: 'Models', params: {id: brand.id}}">
+                <h1> {{ brand }} </h1>
             </router-link>
         </div>
     </div>

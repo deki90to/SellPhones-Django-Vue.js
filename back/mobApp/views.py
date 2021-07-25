@@ -1,9 +1,11 @@
+from rest_framework import serializers
 from . models import Specs, Brand, Model
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from . serializers import SpecsSerializer, BrandSerializer, ModelSerializer
+from . serializers import SpecsSerializer, BrandSerializer, ModelsSerializer
 # Create your views here.
+
 
 @api_view(['GET'])
 def BrandView(request):
@@ -11,11 +13,13 @@ def BrandView(request):
     serializer = BrandSerializer(brand, many=True)
     return Response(serializer.data)
 
+
 @api_view(['GET'])
 def ModelView(request):
     model = Model.objects.all()
-    serializer = ModelSerializer(model, many=True)
+    serializer = ModelsSerializer(model, many=True)
     return Response(serializer.data)
+
 
 @api_view(['GET'])
 def SpecsView(request, pk):
