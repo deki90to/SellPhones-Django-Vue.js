@@ -1,5 +1,6 @@
 <template>
     <div v-if="specs" class="specs">
+        <h1> Specs </h1>
         <ul>
             <li> <b>Model:</b>          {{ specs.model }} </li> <br>
             <li> <b>Dimensions:</b>     {{ specs.dimensions }} </li> <br>
@@ -41,6 +42,8 @@
                 <td>{{ specs.fastCharging }}</td> 
             </tr>
         </table> -->
+        <hr>
+        <router-link to="/"> Back to HOME </router-link>
     </div>
 </template>
 
@@ -48,15 +51,17 @@
 import axios from 'axios'
 
     export default {
-        props:['id'],
+        props: ['id'],
         data(){
             return {
                 specs: [],
             }
         },
         mounted(){
-            axios.get('http://localhost:8000/model/specs/' + this.id)
-            .then(response => {this.specs = response.data})
+            axios.get('http://localhost:8000/specs/' + this.id)
+            .then(response => {
+                this.specs = response.data
+            })
         }
     }
 </script>
