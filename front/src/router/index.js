@@ -3,8 +3,8 @@ import About from '../views/About.vue'
 import Specs from '../views/Specs.vue'
 import Brands from '../views/Brands.vue'
 import BrandModels from '../views/BrandModels.vue'
-
-
+import ModelSpecs from '../views/ModelSpecs.vue'
+import Form from '../views/Form.vue'
 
 const routes = [
   {
@@ -25,10 +25,21 @@ const routes = [
     props: true
   },
   {
+    path: '/modelSpecs/:id',
+    name: 'ModelSpecs',
+    component: ModelSpecs,
+    props: true
+  },
+  {
     path: '/about',
     name: 'About',
     component: About
   },
+  {
+    path: '/form',
+    name: 'Form',
+    component: Form
+  }
 ]
 
 const router = createRouter({

@@ -1,23 +1,23 @@
 from rest_framework import serializers
-from . models import Specs, Brand, Model
+from . models import Specs, Models, Brands
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from . serializers import SpecsSerializer, BrandSerializer, ModelsSerializer
+from . serializers import ModelsSerializer, SpecsSerializer, BrandsSerializer, BrandModelsSerializer, ModelSpecsSerializer
 # Create your views here.
 
 
 @api_view(['GET'])
-def BrandView(request):
-    brand = Brand.objects.all()
-    serializer = BrandSerializer(brand, many=True)
+def BrandsView(request):
+    brand = Brands.objects.all()
+    serializer = BrandsSerializer(brand, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def ModelView(request):
-    model = Model.objects.all()
-    serializer = ModelsSerializer(model, many=True)
+def ModelsView(request, pk):
+    model = Models.objects.get(pk=pk)
+    serializer = ModelsSerializer(model, many=False)
     return Response(serializer.data)
 
 
@@ -26,4 +26,22 @@ def SpecsView(request, pk):
     specs = Specs.objects.get(pk=pk)
     serializer = SpecsSerializer(specs, many=False)
     return Response(serializer.data)
+
+
+
+
+
+@api_view(['GET'])
+def BrandModelsView(request, pk):
+    brandModels = Brands.objects.get(pk=pk)
+    serializer = BrandModelsSerializer(brandModels)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def ModelSpecsView(request, pk):
+    modelSpecs = Models.objects.get(pk=pk)
+    serializer = ModelSpecsSerializer(modelSpecs)
+    return Response(serializer.data)
+
 

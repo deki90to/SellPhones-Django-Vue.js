@@ -1,7 +1,9 @@
 <template>
     <div v-if="specs" class="specs">
         <h1> Specs </h1>
-        <ul>
+        <hr>
+        {{ specs }}
+        <!-- <ul>
             <li> <b>Model:</b>          {{ specs.model }} </li> <br>
             <li> <b>Dimensions:</b>     {{ specs.dimensions }} </li> <br>
             <li> <b>Weight:</b>         {{ specs.weight }} </li> <br>
@@ -13,7 +15,7 @@
             <li> <b>Video:</b>          {{ specs.video }} </li> <br>
             <li> <b>Battery:</b>        {{ specs.battery }} </li> <br>
             <li> <b>Fast Charging:</b>  {{ specs.fastCharging }} </li> <br>
-        </ul>
+        </ul> -->
         <!-- <table class="th">
             <tr>
                 <th><b> Model </b></th>
@@ -62,6 +64,7 @@ import axios from 'axios'
             .then(response => {
                 this.specs = response.data
             })
+            console.log(this.id)
         }
     }
 </script>

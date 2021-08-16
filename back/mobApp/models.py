@@ -5,17 +5,15 @@ from django.urls import base, reverse
 from django.utils import timezone
 # Create your models here.
 
-
-class Brand(models.Model):
-    brandName = models.CharField(max_length=100)
+class Brands(models.Model):
+    brand = models.CharField(max_length=20)
 
     def __str__(self):
-        return(f'{ self.brandName }')
+        return(f'{ self.brand }')
 
-
-class Model(models.Model):
-    brand = models.ForeignKey('Brand', on_delete=models.CASCADE, null=True)
-    modelName = models.CharField(max_length=100)
+class Models(models.Model):
+    brand = models.ForeignKey('Brands', on_delete=models.CASCADE, null=True)
+    model = models.CharField(max_length=100)
     createdOn = models.DateField(default=timezone.now)
     warranty = models.BooleanField()
     damaged = models.BooleanField()
@@ -24,11 +22,11 @@ class Model(models.Model):
     price = models.IntegerField()
 
     def __str__(self):
-        return(f'{ self.brand } { self.modelName } / { self.price }e / Created: { self.createdOn } ')
+        return(f'{ self.brand } - { self.model } / { self.price }e / Created: { self.createdOn }')
 
 
 class Specs(models.Model):
-    model = models.ForeignKey('Model', on_delete=models.CASCADE, null=True)
+    model = models.ForeignKey('Models', on_delete=models.CASCADE, null=True)
     dimensions = models.CharField(max_length=50)
     weight = models.CharField(max_length=10)
     screen = models.CharField(max_length=200)
