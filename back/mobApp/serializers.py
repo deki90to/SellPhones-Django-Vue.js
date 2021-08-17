@@ -4,7 +4,6 @@ from . models import Specs, Models, Brands
 from rest_framework import serializers
 
 
-
 class BrandsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Brands

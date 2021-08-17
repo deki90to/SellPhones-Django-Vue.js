@@ -15,11 +15,13 @@ def BrandsView(request):
         serializer = BrandsSerializer(brand, many=True)
         return Response(serializer.data)
 
-    # elif request.method == 'POST':
-    #     tutorial_serializer = BrandsSerializer(data=request.data)
-    #     if tutorial_serializer.is_valid():
-    #         tutorial_serializer.save()
-    #         return JsonResponse(tutorial_serializer.data, status=status.HTTP_201_CREATED) 
+    elif request.method == 'POST':
+        serializer = BrandsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=status.HTTP_201_CREATED) 
+        else:
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
 def BrandModelsView(request, pk):
@@ -32,18 +34,3 @@ def ModelSpecsView(request, pk):
     modelSpecs = Models.objects.get(pk=pk)
     serializer = ModelSpecsSerializer(modelSpecs)
     return Response(serializer.data)
-
-@api_view(['GET', 'POST'])
-def CreateBrandView(request):
-    # tutorial_data = JSONParser().parse(request)
-    # tutorial_serializer = BrandsSerializer(data=tutorial_data)
-    tutorial_serializer = BrandsSerializer(data=request.data)
-
-    if tutorial_serializer.is_valid():
-        tutorial_serializer.save()
-        return JsonResponse(tutorial_serializer.data, status=status.HTTP_201_CREATED) 
-    # return Response(tutorial_serializer.data)
-
-
-    # serializer = BrandsSerializer(brands, many=True)
-    # return Response(serializer.data)
