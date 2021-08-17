@@ -15,12 +15,10 @@ class ModelsSerializer(serializers.ModelSerializer):
         model = Models
         fields = '__all__'
 
-
 class SpecsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Specs
         fields = '__all__'
-
 
 
 

@@ -1,19 +1,18 @@
 <template>
 	<div>
+        <router-link v-bind:to="{name: 'Form'}"> Add New Model </router-link>
+		
 		<h1> Brands </h1> <br>
 		<div v-for="brand in brands" v-bind:key="brand.id" class="brands">
 			<router-link :to="{ name: 'BrandModels', params: {id: brand.id} }"> 
 				<h3> {{ brand.brand }} </h3> <hr>
 			</router-link>
 		</div>
-
 	</div>
 </template>
 
-
 <script>
 	import axios from 'axios'
-
 	export default {
 		data(){
 			return {
