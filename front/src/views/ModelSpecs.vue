@@ -69,10 +69,8 @@ import axios from 'axios'
         padding: 0.5rem;
         box-shadow: 5px 5px 20px 100px cyan;
     }
-
     .td {
         background-color: lightblue;
         color: black;
-
     }
 </style>

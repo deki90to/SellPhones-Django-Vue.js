@@ -1,8 +1,10 @@
 <template>
     <div> 
+        <router-link v-bind:to="{ name: 'ModelForm'}"> Add New Model </router-link>
+
         <h1> Brand Models </h1> <br>
         <div v-if="brandModels">
-            <div v-for="data in brandModels" :key="data.id"> 
+            <div v-for="data in brandModels" v-bind:key="data.id"> 
                 <div v-for="model in data" v-bind:key="model.id">
                     <table class="th">
                         <tr>

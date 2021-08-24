@@ -1,8 +1,8 @@
 <template>
 	<div>
-        <router-link v-bind:to="{name: 'Form'}"> Add New Model </router-link>
+        <router-link v-bind:to="{name: 'Form'}"> Add New Brand </router-link>
 		
-		<h1> Brands </h1> <br>
+		<h1> Brands </h1> <br> <hr>
 		<div v-for="brand in brands" v-bind:key="brand.id" class="brands">
 			<router-link :to="{ name: 'BrandModels', params: {id: brand.id} }"> 
 				<h3> {{ brand.brand }} </h3> <hr>
@@ -30,7 +30,12 @@
 
 <style scoped>
 	hr {
-		width: 20%;
+		width: 50%;
 		color: cyan;
 	}
+/*	.brand-form {
+	    width: 30%;
+	    height: 40px;
+	    border: 1px solid lightblue;
+	}*/
 </style>

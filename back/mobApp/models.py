@@ -13,13 +13,13 @@ class Brands(models.Model):
 
 class Models(models.Model):
     brand = models.ForeignKey('Brands', on_delete=models.CASCADE, null=True)
-    model = models.CharField(max_length=100)
-    createdOn = models.DateField(default=timezone.now)
-    warranty = models.BooleanField()
-    damaged = models.BooleanField()
-    repaired = models.BooleanField()
-    firstOwner = models.BooleanField()
-    price = models.IntegerField()
+    model = models.CharField(max_length=100, blank=True)
+    createdOn = models.DateField(default=timezone.now, blank=True)
+    warranty = models.BooleanField(blank=True)
+    damaged = models.BooleanField(blank=True)
+    repaired = models.BooleanField(blank=True)
+    firstOwner = models.BooleanField(blank=True)
+    price = models.IntegerField(blank=True)
 
     def __str__(self):
         return(f'{ self.brand } - { self.model } / { self.price }e / Created: { self.createdOn }')
