@@ -9,22 +9,22 @@
                     <table class="th">
                         <tr>
                             <th><b> Model </b></th>
-                            <th><b> Created </b></th>
+                            <!-- <th><b> Created </b></th>
                             <th><b> Warranty </b></th>
                             <th><b> Damaged </b></th>
                             <th><b> Repaired </b></th>
                             <th><b> First Owner </b></th>
-                            <th><b> Price </b></th>
+                            <th><b> Price </b></th> -->
                         </tr>
                         <tr>
                             <td>{{ model.model }}</td>
-                            <td>{{ model.createdOn }}</td> 
+                            <!-- <td>{{ model.createdOn }}</td> 
                             <td>{{ model.warranty }}</td> 
                             <td>{{ model.damaged }}</td> 
                             <td>{{ model.repaired }}</td> 
                             <td>{{ model.firstOwner }}</td> 
                             <td>{{ model.price }}e </td> 
-                            <td> <router-link :to="{ name: 'ModelSpecs', params: {id: model.id} }"> <i> Specs here</i> </router-link> </td>
+                            <td> <router-link :to="{ name: 'ModelSpecs', params: {id: model.id} }"> <i> Specs here</i> </router-link> </td> -->
                         </tr>
                     </table>
                     <hr>

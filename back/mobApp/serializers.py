@@ -20,7 +20,6 @@ class SpecsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class BrandModelsSerializer(serializers.ModelSerializer):
     models = ModelsSerializer(source="models_set", many=True)
     class Meta:
