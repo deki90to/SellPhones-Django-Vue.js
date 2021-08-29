@@ -12,14 +12,14 @@ class Brands(models.Model):
         return(f'{ self.brand }')
 
 class Models(models.Model):
-    brand = models.ForeignKey('Brands', on_delete=models.CASCADE, blank=True)
-    model = models.CharField(max_length=100, )
-    createdOn = models.DateField(default=timezone.now, )
-    warranty = models.BooleanField()
-    damaged = models.BooleanField()
-    repaired = models.BooleanField()
-    firstOwner = models.BooleanField()
-    price = models.IntegerField()
+    brand = models.ForeignKey('Brands', on_delete=models.CASCADE, blank=True, null=True)
+    model = models.CharField(max_length=100, blank=True, null=True)
+    createdOn = models.DateField(default=timezone.now, blank=True, null=True)
+    warranty = models.BooleanField(blank=True, null=True)
+    damaged = models.BooleanField(blank=True, null=True)
+    repaired = models.BooleanField(blank=True, null=True)
+    firstOwner = models.BooleanField(blank=True, null=True)
+    price = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         return(f'{ self.brand } - { self.model } / { self.price }e / Created: { self.createdOn }')

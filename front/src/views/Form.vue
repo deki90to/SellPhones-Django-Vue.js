@@ -5,7 +5,14 @@
 	<form @submit.prevent="createPost()">
 		<input type="text" placeholder="Brand Name" v-model="data.brand">
 		<br><br>
-		<button> Create </button>
+		<button> Create </button> <br><br>
+
+		<div v-if="message.success"> 
+			{{ message.success }} 	
+		</div> 
+		<div v-if="message.failed">
+			{{ message.failed }}
+		</div> 
 	</form>
 
 	<br><hr><br>
@@ -21,6 +28,10 @@
 			return {
 				data: {
 					brand: '',
+				},
+				message: {
+					success: '',
+					failed: '',
 				}
 			}
 		},
@@ -28,24 +39,17 @@
 			createPost() {
 				axios.post('http://localhost:8000/', this.data)
 				.then(response => 
-					console.log(response.data))
-				.catch(error => 
-					console.log(error.message))
-					
-				this.$router.push({ name: 'Brands' })
-			}
-		}
-	}
-	
-</script>
+					this.brand = response.data)
+					this.message.success = 'Brand Added Successfuly'
+					setTimeout(() => {
+						this.$router.push({ name: 'Brands' })
+					}, 2000)
 
-<!-- 		methods: {
-			createPost(){
-				axios.post('http://localhost:8000/', this.data)
-				.then(response => 
-					console.log(response))
 				.catch(error => 
 					console.log(error.message))
+					this.message.failed = 'Brand Adding Failed'
+				}
+				// this.$router.push({ name: 'Brands' })
 			}
 		}
-	} -->
+</script>
