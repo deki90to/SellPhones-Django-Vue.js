@@ -1,6 +1,6 @@
 <template>
 <div>
-	<h1> Create New Model </h1> <hr> <br>
+	<h1> Create New Brand </h1> <hr> <br>
 
 	<form @submit.prevent="createPost()">
 		<input type="text" placeholder="Brand Name" v-model="data.brand">

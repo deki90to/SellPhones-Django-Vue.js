@@ -40,11 +40,13 @@ def BrandModelsView(request, pk):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET', 'POST'])
 def ModelSpecsView(request, pk):
     modelSpecs = Models.objects.get(pk=pk)
     serializer = ModelSpecsSerializer(modelSpecs)
     return Response(serializer.data)
+
 
 @api_view(['DELETE'])
 def BrandsDeleteView(request, pk):

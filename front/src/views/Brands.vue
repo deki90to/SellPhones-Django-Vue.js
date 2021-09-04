@@ -5,10 +5,13 @@
 		<h1> Brands </h1> <br> <hr>
 		<div v-for="brand in brands" v-bind:key="brand.id" class="brands">
 			<router-link :to="{ name: 'BrandModels', params: {id: brand.id} }"> 
-				<h3> {{ brand.brand }} </h3>
+				<h3> {{ brand }} </h3>
 			</router-link>
 
-			<button v-on:click="deleteBrand"> Delete </button> <hr>
+			<button v-on:click="deleteBrand(brand.id)"> Delete </button> <br>
+			
+			{{ deleteBrandError }}
+			<hr>
 		</div>
 	</div>
 </template>
@@ -16,10 +19,12 @@
 <script>
 	import axios from 'axios'
 	export default {
-		props: ['brand.id'],
+		props: ['id'],
 		data(){
 			return {
 				brands: [],
+				deleteBrandSuccess: '',
+				deleteBrandError: '',
 			}
 		},
 		mounted(){
@@ -29,9 +34,15 @@
 			})
 		},
 		methods: {
-			deleteBrand() {
-				console.log('brand Deleted')
-				console.log(this.id)
+			deleteBrand(id) {
+				axios.delete('http://localhost:8000/brandDelete/' + id + '/')
+				.then(response => {
+					// this.deleteBrandSuccess = 'Brand Deleted'
+					document.getElementById('delete').innerHTML = 'Brand Deleted'
+				})
+				.catch(error => {
+					this.deleteBrandError = error.message
+				})
 			}
 		}
 	}
