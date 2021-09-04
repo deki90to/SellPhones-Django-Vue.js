@@ -7,11 +7,11 @@
 		<br><br>
 		<button> Create </button> <br><br>
 
-		<div v-if="message.success"> 
-			{{ message.success }} 	
+		<div v-if="success"> 
+			{{ success }} 	
 		</div> 
-		<div v-if="message.failed">
-			{{ message.failed }}
+		<div v-if="failed">
+			{{ failed }}
 		</div> 
 	</form>
 
@@ -29,10 +29,8 @@
 				data: {
 					brand: '',
 				},
-				message: {
 					success: '',
 					failed: '',
-				}
 			}
 		},
 		methods: {
@@ -40,14 +38,14 @@
 				axios.post('http://localhost:8000/', this.data)
 				.then(response => 
 					this.brand = response.data)
-					this.message.success = 'Brand Added Successfuly'
+					this.success = 'Brand Added Successfuly'
 					setTimeout(() => {
 						this.$router.push({ name: 'Brands' })
-					}, 2000)
+					}, 1000)
 
 				.catch(error => 
 					console.log(error.message))
-					this.message.failed = 'Brand Adding Failed'
+					this.failed = 'Brand Adding Failed'
 				}
 				// this.$router.push({ name: 'Brands' })
 			}

@@ -23,6 +23,7 @@ def BrandsView(request):
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET', 'POST'])
 def BrandModelsView(request, pk):
     if request.method == 'GET':
@@ -44,3 +45,11 @@ def ModelSpecsView(request, pk):
     modelSpecs = Models.objects.get(pk=pk)
     serializer = ModelSpecsSerializer(modelSpecs)
     return Response(serializer.data)
+
+@api_view(['DELETE'])
+def BrandsDeleteView(request, pk):
+    brand = Brands.objects.get(pk=pk)
+
+    if request.method == 'DELETE':
+        brand.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

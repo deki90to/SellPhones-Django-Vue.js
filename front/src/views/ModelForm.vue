@@ -12,12 +12,12 @@
 
 			<button v-on:click.prevent="createForm()"> Create </button>
 			<br><br>	
-				<p>
-					{{ message.success }}
+				<p v-if="success">
+					{{ success }}
 				</p>
-				<p v-if="message.error">
-					{{ message.error }}
-				</p>
+				<!-- <p v-if="message.error">
+					{{ error }}
+				</p> -->
 		</form>
 	</div>
 </template>
@@ -39,24 +39,23 @@
 					firstOwner: '',
 					price: '',
 				},
-				message: {
-					success: '',
-					error: ''
-				},
+				success: '',
+				error: ''
 			}
 		},
 		methods: {
 			createForm() {
-				axios.post('http://localhost:8000/brandModels/' + this.id + '/', this.data)
+				axios.post('http://localhost:8000/brandModels/' , this.data)
 				.then(response => 
 					this.data = response.data)
-					this.message.success = 'Model Successfuly Added'
+					this.success = 'Model Successfuly Added'
 					setTimeout(() => {
 						this.$router.push({ name: Brands })
-					})
+					}, 1000)
+					
 				.catch(error => 
-					this.message.error = error.message)
-					this.message.error = 'Adding Model Failed'
+					this.error = error.message)
+					this.error = 'Adding Model Failed'
 			}
 		}
 	}
