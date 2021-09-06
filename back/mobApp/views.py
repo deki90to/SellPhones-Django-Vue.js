@@ -7,11 +7,12 @@ from . serializers import ModelsSerializer, SpecsSerializer, BrandsSerializer, B
 from rest_framework import status
 # Create your views here.
 
-@api_view(['GET', 'POST'])
+@api_view(['GET', 'POST', 'DELETE'])
 def BrandsView(request):
     if request.method == 'GET':
-        brand = Brands.objects.all()
-        serializer = BrandsSerializer(brand, many=True)
+        brands = Brands.objects.all()
+
+        serializer = BrandsSerializer(brands, many=True)
         return Response(serializer.data)
 
     elif request.method == 'POST':

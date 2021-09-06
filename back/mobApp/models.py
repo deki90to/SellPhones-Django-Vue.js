@@ -24,7 +24,6 @@ class Models(models.Model):
     def __str__(self):
         return(f'{ self.brand } - { self.model } / { self.price }e / Created: { self.createdOn }')
 
-
 class Specs(models.Model):
     model = models.ForeignKey('Models', on_delete=models.CASCADE, null=True)
     dimensions = models.CharField(max_length=50)

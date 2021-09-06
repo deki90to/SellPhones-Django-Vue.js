@@ -36,18 +36,17 @@
 		methods: {
 			createPost() {
 				axios.post('http://localhost:8000/', this.data)
-				.then(response => 
-					this.brand = response.data)
+				.then(response => {
+					this.brand = response.data
 					this.success = 'Brand Added Successfuly'
 					setTimeout(() => {
 						this.$router.push({ name: 'Brands' })
 					}, 1000)
-
+				})
 				.catch(error => 
 					console.log(error.message))
-					this.failed = 'Brand Adding Failed'
+					this.failed = error.message
 				}
-				// this.$router.push({ name: 'Brands' })
 			}
 		}
 </script>

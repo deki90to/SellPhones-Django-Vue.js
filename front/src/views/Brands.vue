@@ -8,41 +8,46 @@
 				<h3> {{ brand }} </h3>
 			</router-link>
 
-			<button v-on:click="deleteBrand(brand.id)"> Delete </button> <br>
-			
-			{{ deleteBrandError }}
-			<hr>
+			<button v-on:click="deleteBrand(brand.id)"> Delete </button> <br> <hr>
 		</div>
+			<div v-if='deleted'>
+				<h4> Deleted - {{ deleted }} </h4>
+			</div>
+
 	</div>
 </template>
 
 <script>
 	import axios from 'axios'
 	export default {
-		props: ['id'],
 		data(){
 			return {
 				brands: [],
-				deleteBrandSuccess: '',
-				deleteBrandError: '',
+				deleted: '',
 			}
 		},
-		mounted(){
+		mounted() {
 			axios.get('http://localhost:8000/')
 			.then(response => {
 				this.brands = response.data
+			})
+			.catch(error => {
+				console.log(error.message)
 			})
 		},
 		methods: {
 			deleteBrand(id) {
 				axios.delete('http://localhost:8000/brandDelete/' + id + '/')
 				.then(response => {
-					// this.deleteBrandSuccess = 'Brand Deleted'
-					document.getElementById('delete').innerHTML = 'Brand Deleted'
+					console.log(response.statusText)
+					this.deleted = response.statusText
+					setTimeout(() => {
+						this.$router.push({ name: 'Brands' })
+					}, 1000)
 				})
-				.catch(error => {
-					this.deleteBrandError = error.message
-				})
+
+				.catch(error => 
+					console.log(error.message))
 			}
 		}
 	}
