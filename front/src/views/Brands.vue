@@ -11,9 +11,8 @@
 			<button v-on:click="deleteBrand(brand.id)"> Delete </button> <br> <hr>
 		</div>
 			<div v-if='deleted'>
-				<h4> Deleted - {{ deleted }} </h4>
+				<h4> Deleting... </h4>
 			</div>
-
 	</div>
 </template>
 
@@ -39,10 +38,11 @@
 			deleteBrand(id) {
 				axios.delete('http://localhost:8000/brandDelete/' + id + '/')
 				.then(response => {
-					console.log(response.statusText)
+					console.log(response)
 					this.deleted = response.statusText
 					setTimeout(() => {
-						this.$router.push({ name: 'Brands' })
+						console.log('timed out 1000')
+						this.$router.go(0)
 					}, 1000)
 				})
 

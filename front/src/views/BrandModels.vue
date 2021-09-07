@@ -30,7 +30,8 @@
                     <hr>
                 </div>
             </div>
-        </div>
+        </div> <br>
+        <router-link :to="{ name: 'Brands'}"> Back To HOME </router-link>
     </div>
 </template>
 

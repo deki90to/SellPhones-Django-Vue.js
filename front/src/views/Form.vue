@@ -43,9 +43,10 @@
 						this.$router.push({ name: 'Brands' })
 					}, 1000)
 				})
-				.catch(error => 
-					console.log(error.message))
+				.catch(error => {
+					console.log(error.message)
 					this.failed = error.message
+					})
 				}
 			}
 		}

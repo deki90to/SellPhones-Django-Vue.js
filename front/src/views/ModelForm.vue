@@ -11,7 +11,8 @@
 			<input type="text" placeholder="Price" v-model="data.price"><br><br><br>
 
 			<button v-on:click.prevent="createForm()"> Create </button>
-			<br><br>	
+			<br><br>
+			<router-link :to="{ name: 'Brands' }"> Back To HOME </router-link>
 				<p v-if="success">
 					{{ success }}
 				</p>
