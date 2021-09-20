@@ -13,6 +13,11 @@
 
 			<button v-on:click.prevent="createForm"> Create </button>
 			<br><br>
+			
+			<h4 v-if="added">
+				{{ added }}
+			</h4>
+
 			<router-link :to="{ name: 'Brands' }"> Back To HOME </router-link>
 				<!-- <p v-if="success">
 					{{ success }}
@@ -36,8 +41,9 @@
 					damaged: '',
 					repaired: '',
 					firstOwner: '',
-					price: '',
+					price: ''
 				},
+				added: '',
 				// success: '',
 			}
 		},
@@ -46,6 +52,7 @@
 				axios.post('http://localhost:8000/brandModels/' + this.id + '/', this.data)
 				.then(response => {
 					this.data = response.data
+					this.added = 'Adding Model...'
 					// this.success = 'Model Successfuly Added'
 					setTimeout(() => {
 						this.$router.push({ name: 'BrandModels' })

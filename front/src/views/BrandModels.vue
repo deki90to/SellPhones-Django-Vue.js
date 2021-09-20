@@ -8,6 +8,7 @@
                 <div v-for="model in data" v-bind:key="model.id">
                     <table class="th">
                         <tr>
+                            <th><b> Brand      </b> </th>
                             <th><b> Model       </b></th>
                             <th><b> Created     </b></th>
                             <th><b> Warranty    </b></th>
@@ -21,6 +22,8 @@
                             </th>
                         </tr>
                         <tr>
+<!-- PREUZMI IME IZ "BRAND" KOMPOMENTE -->
+                            <!-- <td> {{ brandName }} </td> -->
                             <td> {{ model.model }}      </td>
                             <td> {{ model.createdOn }}  </td> 
                             <td> {{ model.warranty }}   </td> 
@@ -50,13 +53,14 @@
         props: ['id'],
         data(){
             return {
-                brandModels: []
+                brandModels: [],
             }
         },
         mounted(){
             axios.get('http://localhost:8000/brandModels/' + this.id)
             .then(response => {
                 this.brandModels = response.data
+                console.log(this.brand)
             })
         },
         methods: {
@@ -65,8 +69,7 @@
                 .then(response => {
                     console.log(response)
                     setTimeout(() => {
-                        this.$router.push({ name: 'Brands'})
-                        // this.$router.go(0)
+                        this.$router.go(0)
                     }, 500)
                 })
                 .catch(error => {
