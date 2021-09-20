@@ -8,29 +8,36 @@
                 <div v-for="model in data" v-bind:key="model.id">
                     <table class="th">
                         <tr>
-                            <th><b> Model </b></th>
-                            <!-- <th><b> Created </b></th>
-                            <th><b> Warranty </b></th>
-                            <th><b> Damaged </b></th>
-                            <th><b> Repaired </b></th>
+                            <th><b> Model       </b></th>
+                            <th><b> Created     </b></th>
+                            <th><b> Warranty    </b></th>
+                            <th><b> Damaged     </b></th>
+                            <th><b> Repaired    </b></th>
                             <th><b> First Owner </b></th>
-                            <th><b> Price </b></th> -->
+                            <th><b> Price       </b></th>
+                            <th><router-link :to="{ name: 'ModelSpecs', params: {id: model.id} }"> 
+                                    <i> Specs here </i> 
+                                </router-link> 
+                            </th>
                         </tr>
                         <tr>
-                            <td>{{ model.model }}</td>
-                            <!-- <td>{{ model.createdOn }}</td> 
-                            <td>{{ model.warranty }}</td> 
-                            <td>{{ model.damaged }}</td> 
-                            <td>{{ model.repaired }}</td> 
-                            <td>{{ model.firstOwner }}</td> 
-                            <td>{{ model.price }}e </td> 
-                            <td> <router-link :to="{ name: 'ModelSpecs', params: {id: model.id} }"> <i> Specs here</i> </router-link> </td> -->
+                            <td> {{ model.model }}      </td>
+                            <td> {{ model.createdOn }}  </td> 
+                            <td> {{ model.warranty }}   </td> 
+                            <td> {{ model.damaged }}    </td> 
+                            <td> {{ model.repaired }}   </td> 
+                            <td> {{ model.firstOwner }} </td> 
+                            <td> {{ model.price }}      </td>
+                            <td> <button v-on:click="deleteModel(model.id)">
+                                    Delete Model 
+                                </button> 
+                            </td>
                         </tr>
-                    </table>
-                    <hr>
+                    </table> <hr>
                 </div>
             </div>
-        </div> <br>
+        </div><br>  
+
         <router-link :to="{ name: 'Brands'}"> Back To HOME </router-link>
     </div>
 </template>
@@ -51,6 +58,21 @@
             .then(response => {
                 this.brandModels = response.data
             })
+        },
+        methods: {
+            deleteModel(id) {
+                axios.delete('http://localhost:8000/modelDelete/' + id + '/')
+                .then(response => {
+                    console.log(response)
+                    setTimeout(() => {
+                        this.$router.push({ name: 'Brands'})
+                        // this.$router.go(0)
+                    }, 500)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            }
         }
     }
 </script>

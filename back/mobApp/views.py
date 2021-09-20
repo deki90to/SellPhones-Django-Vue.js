@@ -28,7 +28,7 @@ def BrandsView(request):
 @api_view(['GET', 'POST'])
 def BrandModelsView(request, pk):
     if request.method == 'GET':
-        brandModels = Brands.objects.get(pk=pk)
+        brandModels = Brands.objects.get(pk = pk)
         serializer = BrandModelsSerializer(brandModels)
         return Response(serializer.data)
 
@@ -44,15 +44,25 @@ def BrandModelsView(request, pk):
 
 @api_view(['GET', 'POST'])
 def ModelSpecsView(request, pk):
-    modelSpecs = Models.objects.get(pk=pk)
+    modelSpecs = Models.objects.get(pk = pk)
     serializer = ModelSpecsSerializer(modelSpecs)
     return Response(serializer.data)
 
 
+
+
 @api_view(['DELETE'])
 def BrandsDeleteView(request, pk):
-    brand = Brands.objects.get(pk=pk)
+    brand = Brands.objects.get(pk = pk)
 
     if request.method == 'DELETE':
         brand.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['DELETE'])
+def ModelsDeleteView(request, pk):
+    modelModel = Models.objects.get(pk = pk)
+
+    if request.method == 'DELETE':
+        modelModel.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

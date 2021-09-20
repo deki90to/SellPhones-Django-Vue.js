@@ -1,24 +1,29 @@
 <template>
 	<div>
-        <router-link v-bind:to="{name: 'Form'}"> Add New Brand </router-link>
+        <router-link v-bind:to="{name: 'BrandForm'}"> Add New Brand </router-link>
 		
 		<h1> Brands </h1> <br> <hr>
 		<div v-for="brand in brands" v-bind:key="brand.id" class="brands">
 			<router-link :to="{ name: 'BrandModels', params: {id: brand.id} }"> 
-				<h3> {{ brand }} </h3>
+				<h3> {{ brand.brand }} </h3>
 			</router-link>
 
-			<button v-on:click="deleteBrand(brand.id)"> Delete </button> <br> <hr>
+			<button v-on:click="deleteBrand(brand.id)"> Delete </button> 
+			<br> <hr>
 		</div>
-			<div v-if='deleted'>
-				<h4> Deleting... </h4>
-			</div>
-	</div>
+		
+		<div v-if='deleted'>
+			<h4> Deleting... </h4>
+		</div>
+</div>
 </template>
 
 <script>
 	import axios from 'axios'
+	import BrandForm from './BrandForm.vue'
+
 	export default {
+		components: { BrandForm },
 		data(){
 			return {
 				brands: [],
@@ -41,15 +46,13 @@
 					console.log(response)
 					this.deleted = response.statusText
 					setTimeout(() => {
-						console.log('timed out 1000')
 						this.$router.go(0)
 					}, 1000)
 				})
-
 				.catch(error => 
 					console.log(error.message))
 			}
-		}
+		},
 	}
 </script>
 
