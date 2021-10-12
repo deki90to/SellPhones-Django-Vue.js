@@ -4,11 +4,11 @@
 		
 		<h1> Brands </h1> <br> <hr>
 		<div v-for="brand in brands" v-bind:key="brand.id" class="brands">
-			<router-link :to="{ name: 'BrandModels', params: {id: brand.id} }"> 
+			<router-link :to="{ name: 'BrandModels', params: {id: brand.id, brand: brand} }"> 
 				<h3> {{ brand.brand }} </h3>
 			</router-link>
 
-			<button v-on:click="deleteBrand(brand.id)"> Delete </button> 
+			<!-- <button v-on:click="deleteBrand(brand.id)"> Delete </button>  -->
 			<br> <hr>
 		</div>
 		
@@ -47,7 +47,7 @@
 					this.deleted = response.statusText
 					setTimeout(() => {
 						this.$router.go(0)
-					}, 1000)
+					}, 500)
 				})
 				.catch(error => 
 					console.log(error.message))

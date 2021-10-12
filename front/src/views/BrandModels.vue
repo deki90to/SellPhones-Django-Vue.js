@@ -8,7 +8,6 @@
                 <div v-for="model in data" v-bind:key="model.id">
                     <table class="th">
                         <tr>
-                            <th><b> Brand      </b> </th>
                             <th><b> Model       </b></th>
                             <th><b> Created     </b></th>
                             <th><b> Warranty    </b></th>
@@ -16,14 +15,13 @@
                             <th><b> Repaired    </b></th>
                             <th><b> First Owner </b></th>
                             <th><b> Price       </b></th>
-                            <th><router-link :to="{ name: 'ModelSpecs', params: {id: model.id} }"> 
+                            <th>
+                                <router-link :to="{ name: 'ModelSpecs', params: {id: model.id} }"> 
                                     <i> Specs here </i> 
                                 </router-link> 
                             </th>
                         </tr>
                         <tr>
-<!-- PREUZMI IME IZ "BRAND" KOMPOMENTE -->
-                            <!-- <td> {{ brandName }} </td> -->
                             <td> {{ model.model }}      </td>
                             <td> {{ model.createdOn }}  </td> 
                             <td> {{ model.warranty }}   </td> 
@@ -31,7 +29,8 @@
                             <td> {{ model.repaired }}   </td> 
                             <td> {{ model.firstOwner }} </td> 
                             <td> {{ model.price }}      </td>
-                            <td> <button v-on:click="deleteModel(model.id)">
+                            <td> 
+                                <button v-on:click="deleteModel(model.id)">
                                     Delete Model 
                                 </button> 
                             </td>
@@ -50,7 +49,15 @@
     import axios from 'axios'
 
     export default {
-        props: ['id'],
+        props: {
+            id: String,
+            // id: {
+            //     type: String,
+            // },
+            // brand: {
+            //     type: String,
+            // }
+        },
         data(){
             return {
                 brandModels: [],
@@ -60,7 +67,6 @@
             axios.get('http://localhost:8000/brandModels/' + this.id)
             .then(response => {
                 this.brandModels = response.data
-                console.log(this.brand)
             })
         },
         methods: {
